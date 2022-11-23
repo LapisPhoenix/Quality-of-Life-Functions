@@ -11,6 +11,6 @@ def fancy(title:str, content:str, dash_length:int = 20, dash_type:str = "-"):
     FORMAT = dash_type * dash_length + title + dash_type * dash_length
 
     if len(dash_type) > 1:
-      raise Exception("Dash Type must be 1 character long. Example: dash_type='*'")
+        raise Exception("Dash Type must be 1 character long. Example: dash_type='*'")
     else:
         print(f"{FORMAT}\n{content}\n{dash_type * len(FORMAT)}")
