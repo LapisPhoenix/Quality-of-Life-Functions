@@ -17,7 +17,7 @@ def colorp(level: int, message: str, end: str = '\n'):
     """
 
     if level not in range(0, 5):
-        raise Exception(f"Invalid level {level}. Level has to be between 1-4")
+        raise Exception(f"Invalid level {level}. Level has to be between 0-4")
 
     level_colors = {0: colorama.Fore.LIGHTGREEN_EX,
                     1: colorama.Fore.LIGHTYELLOW_EX,
