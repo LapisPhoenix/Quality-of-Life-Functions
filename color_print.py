@@ -3,12 +3,12 @@ import colorama
 
 def colorp(level: int, message: str, end: str = '\n'):
     """
-    Prints Colored Text
+    Prints colored text.
     Arguments:
-        level:   int = The message level.
+        level:   int = The message level (0-4).
         message: str = The message to display.
-        end:     str = The end if the message. (DEFAULT: '\\n')
-    Level System:
+        end:     str = The end of the message (default: '\n').
+    Level system:
         0 - Success\n
         1 - Info\n
         2 - Warning\n
@@ -16,28 +16,29 @@ def colorp(level: int, message: str, end: str = '\n'):
         4 - Critical Error\n
     """
 
-    if level not in range(0, 5):
-        raise Exception(f"Invalid level {level}. Level has to be between 0-4")
+    level_colors = {
+        0: colorama.Fore.LIGHTGREEN_EX,   # Success
+        1: colorama.Fore.LIGHTYELLOW_EX,  # Info
+        2: colorama.Fore.YELLOW,          # Warning
+        3: colorama.Fore.LIGHTRED_EX,     # Error
+        4: colorama.Fore.RED              # Critical Error
+    }
 
-    level_colors = {0: colorama.Fore.LIGHTGREEN_EX,     # Success
-                    1: colorama.Fore.LIGHTYELLOW_EX,    # Info
-                    2: colorama.Fore.YELLOW,            # Warning
-                    3: colorama.Fore.LIGHTRED_EX,       # Error
-                    4: colorama.Fore.RED}               # Critical Error
+    level_types = {
+        0: "SUCCESS",
+        1: "INFO",
+        2: "WARNING",
+        3: "ERROR",
+        4: "CRITICAL ERROR"
+    }
 
-    level_types = {0: "SUCCESS",
-                   1: "INFO",
-                   2: "WARNING",
-                   3: "ERROR",
-                   4: "CRITICAL ERROR"}
+    if level not in level_colors:
+        raise ValueError(f"Invalid level {level}. Level must be between 0-4")
 
-    if not message:
-        raise Exception("Message is a required argument")
-
-    color = level_colors.get(level)
-    type = level_types.get(level)
+    color = level_colors[level]
+    type_ = level_types[level]
     reset = colorama.Fore.RESET
-    print(f"[{color}{type}{reset}] {message}{reset}", end=end)
+    print(f"[{color}{type_}{reset}] {message}{reset}", end=end)
 
     if level == 4:
         exit(message)
